@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Step 1: Checking Student Record
+function checkStudentRecord() {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            console.log("Checking Student Record...");
+            resolve();
+        }, 2000);
+    });
+}
+
+// Step 2: Calculating Marks
+function calculateMarks() {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            console.log("Calculating Marks...");
+            resolve({
+                studentName: "Manasi",
+                totalMarks: 470,
+                percentage: 92
+            });
+        }, 2000);
+    });
+}
+
+// Step 3: Generating Result
+function generateResult(studentData) {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            console.log("Generating Result...");
+
+            let grade;
+
+            if (studentData.percentage >= 90) {
+                grade = "A";
+            } else if (studentData.percentage >= 75) {
+                grade = "B";
+            } else if (studentData.percentage >= 60) {
+                grade = "C";
+            } else {
+                grade = "F";
+            }
+
+            resolve({
+                ...studentData,
+                grade
+            });
+        }, 2000);
+    });
+}
+
+// Main Function using Async/Await
+async function studentResultPortal() {
+    console.log("Student Result Generation Started...\n");
+
+    await checkStudentRecord();
+
+    const studentData = await calculateMarks();
+
+    const result = await generateResult(studentData);
+
+    setTimeout(() => {
+        console.log("Result Generated Successfully!\n");
+
+        console.log("Student Name:", result.studentName);
+        console.log("Total Marks:", result.totalMarks);
+        console.log("Percentage:", result.percentage + "%");
+        console.log("Grade:", result.grade);
+    }, 2000);
+}
+
+// Call Function
+studentResultPortal();
+    </script>
+</body>
+</html>
